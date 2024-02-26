@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}" />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename='loading.css')}}"
+    />
+    <script>
+      function showDiv(input) {
+        if (input !== "") {
+          document.getElementById("loading").style.display = "block";
+          document.getElementById("table").style.display = "none";
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    <h1 class="title">Describe your research interests:</h1>
+    <div>
+      <div class="search-container">
+        <form action="/search" method="GET">
+          <input type="text" id="input" name="input" required />
+          <button
+            type="submit"
+            onclick="showDiv(document.getElementById('input').value)"
+          >
+            Search
+          </button>
+        </form>
+      </div>
+      <div class="spinner">
+        <div class="lds-spinner" id="loading" style="display: none">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+    <div class="table" id="table">{{table | safe}}</div>
+  </body>
+</html>
